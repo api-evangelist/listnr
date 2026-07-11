@@ -1,0 +1,73 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Listnr
+providerId: listnr
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- AI
+- Text to Speech
+- TTS
+- Voice
+- Rate Limiting
+- Quotas
+description: >-
+  Listnr does not publish fixed numeric per-request rate limits for the
+  Text-to-Speech API. In practice, usage is bounded by your subscription's
+  monthly voice-generation credit allowance (words/characters synthesized)
+  rather than by a documented requests-per-second or requests-per-minute cap.
+  Long conversions are handled through the asynchronous endpoints
+  (convert-text-async / convert-url-async), which return a jobId that clients
+  poll via job-status until the job reaches COMPLETED or FAILED, so throughput
+  for large jobs is governed by queue processing rather than a synchronous rate
+  limit.
+notes: >-
+  No numeric request-rate limit is documented in Listnr's public API docs as of
+  the review date. Values here describe the credit-based quota model, not a
+  confirmed per-endpoint throttle; verify against your plan and any headers the
+  live API returns.
+sources:
+- https://github.com/team-listnr/text-to-speech-api
+- https://listnr.ai/text-to-speech-api
+- https://listnr.ai/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: Text-to-Speech API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the TTS API.
+- name: Monthly Voice-Generation Credits
+  scope: account
+  metric: credits
+  limit: per plan
+  notes: >-
+    Usage is capped by the plan's monthly credit allowance (e.g. 1,000 free
+    words, 20,000 / 50,000 / 250,000 credits on Individual / Solo / Agency).
+- name: Asynchronous Job Processing
+  scope: account
+  metric: jobs
+  limit: queue-bound
+  notes: >-
+    Large conversions run via the async endpoints and are polled with
+    job-status; effective throughput depends on queue processing, not a
+    synchronous rate cap.
+policies:
+- name: Credit-Based Quota
+  description: >-
+    Requests draw down a monthly credit allowance tied to the subscription
+    plan rather than a per-minute request budget.
+- name: Async for Large Jobs
+  description: >-
+    Use convert-text-async / convert-url-async for long inputs and poll
+    job-status; sync endpoints are best for short text.
+- name: Backoff Strategy
+  description: >-
+    Clients should implement exponential backoff with jitter and honor
+    Retry-After on any 429 response.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

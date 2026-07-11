@@ -1,0 +1,94 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Listnr
+providerId: listnr
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- AI
+- Text to Speech
+- TTS
+- Voice
+- Audio
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Listnr spend. Listnr bills on a monthly subscription basis in
+  USD, metered primarily by voice-generation credits (words/characters of audio
+  synthesized) with plan-level allowances for storage and video generation. The
+  Text-to-Speech API shares the same account and credit pool as the web app, so
+  API-driven synthesis draws down the same monthly allowance rather than
+  incurring a separate per-call invoice. Cost is managed by picking the plan
+  whose credit allowance matches expected audio volume and by using the async
+  endpoints to batch large jobs.
+notes: >-
+  Listnr does not publish a separate per-request API price; API usage consumes
+  plan credits. Verify current plan rates and credit-to-audio conversion on the
+  Listnr pricing page.
+sources:
+- https://listnr.ai/
+- https://listnr.ai/pricing
+- https://listnr.ai/text-to-speech-api
+- https://github.com/team-listnr/text-to-speech-api
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Listnr
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Listnr Text-to-Speech
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Listnr
+  PublisherName: Listnr
+  InvoiceIssuerName: Listnr
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription-Based
+meters:
+- name: voice_credits
+  description: Voice-generation credits (words/characters synthesized) consumed by web app and API, drawn from the monthly plan allowance.
+  unit: credits
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: storage
+  description: Stored audio/project storage against the plan's storage cap.
+  unit: bytes
+  aggregation: max
+  dimensions:
+  - account
+  - plan
+- name: videos
+  description: Text-to-video generations against the plan's monthly video quota.
+  unit: videos
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+principles:
+- name: Visibility
+  description: Track monthly credit consumption against the plan allowance; attribute API-driven synthesis to the same pool as web-app usage.
+- name: Allocation
+  description: Map credit usage to teams or projects by API key / account so audio spend ties to internal cost centers.
+- name: Optimization
+  description: Match the plan tier to expected audio volume, reuse cached audio via audioKey, and batch large jobs through the async endpoints to avoid waste.
+- name: Accountability
+  description: Assign an owner per Listnr account; review monthly credit burn versus the plan allowance and upgrade or downgrade tiers accordingly.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

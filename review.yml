@@ -1,0 +1,82 @@
+aid: listnr
+name: Listnr
+review:
+  question: Does Listnr expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Listnr's public Text-to-Speech API is
+    request/response REST over HTTPS. Long-running conversions are handled with
+    an asynchronous request/poll pattern (convert-text-async / convert-url-async
+    return a jobId, which the client polls via GET /job-status) rather than any
+    server-push transport. There is no WebSocket or Server-Sent Events surface
+    on Listnr's own API to model, so no AsyncAPI spec was created.
+findings:
+  summary: |
+    Listnr does not publish a documented public WebSocket API. Listnr AI is a
+    text-to-speech and AI voice platform (listnr.ai) with 1,000+ voices across
+    142+ languages. It exposes a documented public Text-to-Speech API at base
+    https://bff.listnr.tech/api/tts/v1, authenticated with a personal API key
+    passed in an x-listnr-token header (generated in the dashboard at
+    voices.listnr.tech). All documented endpoints are request/response REST
+    over HTTPS: POST /convert-text and /convert-url (synchronous), POST
+    /convert-text-async and /convert-url-async (return a jobId), GET
+    /available-voices, and GET /job-status. Asynchronous work uses a
+    client-initiated polling loop against /job-status, not a WebSocket. No
+    realtime, bidirectional, or streaming WebSocket (ws:// or wss://) endpoint
+    is documented for text-to-speech, voices, or jobs as of the review date.
+  accessModel: |
+    Listnr is primarily a web application (podcast/voiceover/text-to-video
+    studio). On top of that, it offers a documented public Text-to-Speech API
+    whose reference lives in a public GitHub repository
+    (github.com/team-listnr/text-to-speech-api). API keys are self-service from
+    the Listnr dashboard. The endpoints, parameters, headers, and job-status
+    values are confirmed from that public documentation; the OpenAPI and
+    collections in this repo model request/response schemas from the documented
+    fields and should be verified against the live API.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://bff.listnr.tech/api/tts/v1
+      documented: true
+      note: Text-to-Speech, Voices, and Jobs endpoints. Auth via x-listnr-token header.
+    - protocol: HTTP Poll
+      scheme: https
+      documented: true
+      note: >-
+        Async conversions return a jobId; clients poll GET /job-status until
+        COMPLETED or FAILED. Client-initiated polling, not server push.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Listnr's public API docs as of the review date.
+  endpointsConfirmedRest:
+    - POST https://bff.listnr.tech/api/tts/v1/convert-text
+    - POST https://bff.listnr.tech/api/tts/v1/convert-text-async
+    - POST https://bff.listnr.tech/api/tts/v1/convert-url
+    - POST https://bff.listnr.tech/api/tts/v1/convert-url-async
+    - GET  https://bff.listnr.tech/api/tts/v1/available-voices
+    - GET  https://bff.listnr.tech/api/tts/v1/job-status
+sources:
+  - url: https://github.com/team-listnr/text-to-speech-api
+    type: APIReference
+    note: Public API reference - base URL, endpoints, x-listnr-token auth, params, job-status values. All REST.
+  - url: https://listnr.ai/text-to-speech-api
+    type: Documentation
+    note: Product page for the TTS API; links to the GitHub docs; no WebSocket mentioned.
+  - url: https://voices.listnr.tech
+    type: SignUp
+    note: Dashboard where personal API keys are generated.
+  - url: https://listnr.ai/pricing
+    type: Pricing
+    note: Subscription plans metered by voice-generation credits; no separate per-API-call price.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Listnr's own public API is
+    request/response REST plus an async request/poll pattern (jobId +
+    GET /job-status). No AsyncAPI document was created because there is no
+    server-push transport (WebSocket or SSE) on Listnr's API to model.

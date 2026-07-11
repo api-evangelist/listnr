@@ -1,0 +1,94 @@
+{
+  "info": {
+    "name": "Listnr Text-to-Speech API",
+    "description": "Convert SSML text or an article URL into MP3/WAV speech using Listnr's 1,000+ AI voices across 142+ languages, synchronously or asynchronously; list available voices; and poll async job status. Base URL: https://bff.listnr.tech/api/tts/v1. All requests require a personal API key generated at voices.listnr.tech, passed in an x-listnr-token header. Endpoints transcribed from Listnr's public docs at github.com/team-listnr/text-to-speech-api.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "x-listnr-token", "type": "string" },
+      { "key": "value", "value": "{{listnrToken}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://bff.listnr.tech/api/tts/v1", "type": "string" },
+    { "key": "listnrToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Text-to-Speech",
+      "item": [
+        {
+          "name": "Convert text to speech (sync)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"voice\": \"\",\n  \"ssml\": \"<p></p>\",\n  \"audioFormat\": \"mp3\",\n  \"audioSampleRate\": 24000\n}" },
+            "url": { "raw": "{{baseUrl}}/convert-text", "host": ["{{baseUrl}}"], "path": ["convert-text"] },
+            "description": "Synchronously converts SSML text into audio and returns an audioUrl."
+          }
+        },
+        {
+          "name": "Convert text to speech (async)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"voice\": \"\",\n  \"ssml\": \"<p></p>\"\n}" },
+            "url": { "raw": "{{baseUrl}}/convert-text-async", "host": ["{{baseUrl}}"], "path": ["convert-text-async"] },
+            "description": "Queues an async conversion of SSML text and returns a jobId to poll."
+          }
+        },
+        {
+          "name": "Convert URL to speech (sync)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"voice\": \"\",\n  \"url\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/convert-url", "host": ["{{baseUrl}}"], "path": ["convert-url"] },
+            "description": "Synchronously converts an article URL into audio and returns an audioUrl."
+          }
+        },
+        {
+          "name": "Convert URL to speech (async)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"voice\": \"\",\n  \"url\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/convert-url-async", "host": ["{{baseUrl}}"], "path": ["convert-url-async"] },
+            "description": "Queues an async conversion of an article URL and returns a jobId to poll."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Voices",
+      "item": [
+        {
+          "name": "List available voices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/available-voices?lang=&gender=&style=", "host": ["{{baseUrl}}"], "path": ["available-voices"], "query": [{ "key": "lang", "value": "" }, { "key": "gender", "value": "" }, { "key": "style", "value": "" }] },
+            "description": "Returns the voices available on Listnr, optionally filtered by language, gender, and style."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Jobs",
+      "item": [
+        {
+          "name": "Get job status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/job-status?jobId=", "host": ["{{baseUrl}}"], "path": ["job-status"], "query": [{ "key": "jobId", "value": "" }] },
+            "description": "Returns the status of an async conversion job (PENDING, IN_PROGRESS, COMPLETED, FAILED)."
+          }
+        }
+      ]
+    }
+  ]
+}

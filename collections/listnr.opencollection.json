@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listnr Text-to-Speech API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "x-listnr-token",
+        "value": "{{listnrToken}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Text-to-Speech",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Convert text to speech (sync).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://bff.listnr.tech/api/tts/v1/convert-text",
+            "body": { "type": "json", "data": "{\n  \"voice\": \"\",\n  \"ssml\": \"<p></p>\",\n  \"audioFormat\": \"mp3\",\n  \"audioSampleRate\": 24000\n}" }
+          },
+          "docs": "Synchronously converts SSML text into audio and returns an audioUrl."
+        },
+        {
+          "info": { "name": "Convert text to speech (async).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://bff.listnr.tech/api/tts/v1/convert-text-async",
+            "body": { "type": "json", "data": "{\n  \"voice\": \"\",\n  \"ssml\": \"<p></p>\"\n}" }
+          },
+          "docs": "Queues an async conversion of SSML text and returns a jobId to poll."
+        },
+        {
+          "info": { "name": "Convert URL to speech (sync).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://bff.listnr.tech/api/tts/v1/convert-url",
+            "body": { "type": "json", "data": "{\n  \"voice\": \"\",\n  \"url\": \"\"\n}" }
+          },
+          "docs": "Synchronously converts an article URL into audio and returns an audioUrl."
+        },
+        {
+          "info": { "name": "Convert URL to speech (async).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://bff.listnr.tech/api/tts/v1/convert-url-async",
+            "body": { "type": "json", "data": "{\n  \"voice\": \"\",\n  \"url\": \"\"\n}" }
+          },
+          "docs": "Queues an async conversion of an article URL and returns a jobId to poll."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Voices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List available voices.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://bff.listnr.tech/api/tts/v1/available-voices",
+            "params": [
+              { "name": "lang", "value": "", "type": "query", "description": "Filter voices by language." },
+              { "name": "gender", "value": "", "type": "query", "description": "Filter voices by gender." },
+              { "name": "style", "value": "", "type": "query", "description": "Filter voices by style or tone." }
+            ]
+          },
+          "docs": "Returns the voices available on Listnr, optionally filtered by language, gender, and style."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get job status.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://bff.listnr.tech/api/tts/v1/job-status",
+            "params": [
+              { "name": "jobId", "value": "", "type": "query", "description": "The identifier of the job to check." }
+            ]
+          },
+          "docs": "Returns the status of an async conversion job (PENDING, IN_PROGRESS, COMPLETED, FAILED)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

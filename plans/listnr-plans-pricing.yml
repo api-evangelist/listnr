@@ -1,0 +1,133 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Listnr
+providerId: listnr
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- AI
+- Text to Speech
+- TTS
+- Voice
+- Audio
+- Plans
+description: >-
+  Listnr sells subscription plans metered by monthly voice-generation credits
+  (roughly, characters/words of synthesized audio) rather than by separate API
+  call fees. A free tier grants 1,000 words to start without a credit card.
+  Paid plans (Individual, Solo, Agency) add larger monthly credit allowances,
+  storage, and video quotas; all include 1,000+ voices, 142+ languages,
+  unlimited downloads/exports, and commercial rights. The Text-to-Speech API is
+  accessed with the same account and draws down the same credit allowance;
+  Listnr does not publish a separate per-request API price. Prices below are the
+  published annual rates with their monthly-equivalent; verify current pricing
+  and any month-to-month rates on the Listnr pricing page.
+notes: >-
+  Credit-to-audio conversion is approximate (Listnr markets ~20,000 credits as
+  roughly 2 hours of voice). Monthly-billed rates and any API-specific add-on
+  are not separately reconciled here; confirm on listnr.ai/pricing.
+sources:
+- https://listnr.ai/pricing
+- https://listnr.ai/text-to-speech-api
+- https://github.com/team-listnr/text-to-speech-api
+plans:
+- id: listnr-free
+  name: Free
+  type: free
+  description: >-
+    Free starter tier to try Listnr text-to-speech without a credit card.
+  entries:
+  - label: Included Words
+    name: free_words
+    type: usage
+    metric: words
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (1,000 words to start)
+    userMultiplied: false
+  elements:
+  - name: 1000+ Voices
+  - name: 142+ Languages
+  - name: Commercial Rights
+- id: listnr-individual
+  name: Individual
+  type: paid
+  description: >-
+    Entry paid plan with roughly 2 hours of monthly voice generation, 50GB
+    storage, and 50 videos/month.
+  entries:
+  - label: Monthly Credits
+    name: individual_credits
+    type: usage
+    metric: credits
+    limit: 20000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $190/yr (~$15.83/mo)
+    userMultiplied: false
+  elements:
+  - name: 1000+ Voices
+  - name: 142+ Languages
+  - name: 50GB Storage
+  - name: 50 Videos per Month
+  - name: Text-to-Speech API Access
+  - name: Unlimited Downloads
+  - name: Commercial Rights
+- id: listnr-solo
+  name: Solo
+  type: paid
+  description: >-
+    Mid paid plan with roughly 5 hours of monthly voice generation, 100GB
+    storage, and 150 videos/month.
+  entries:
+  - label: Monthly Credits
+    name: solo_credits
+    type: usage
+    metric: credits
+    limit: 50000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $390/yr (~$32.50/mo)
+    userMultiplied: false
+  elements:
+  - name: 1000+ Voices
+  - name: 142+ Languages
+  - name: 100GB Storage
+  - name: 150 Videos per Month
+  - name: Text-to-Speech API Access
+  - name: Unlimited Downloads
+  - name: Commercial Rights
+- id: listnr-agency
+  name: Agency
+  type: paid
+  description: >-
+    Top published plan with roughly 25 hours of monthly voice generation, 250GB
+    storage, and 250 videos/month.
+  entries:
+  - label: Monthly Credits
+    name: agency_credits
+    type: usage
+    metric: credits
+    limit: 250000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $990/yr (~$82.50/mo)
+    userMultiplied: false
+  elements:
+  - name: 1000+ Voices
+  - name: 142+ Languages
+  - name: 250GB Storage
+  - name: 250 Videos per Month
+  - name: Text-to-Speech API Access
+  - name: Unlimited Downloads
+  - name: Commercial Rights
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
