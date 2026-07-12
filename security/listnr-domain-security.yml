@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: listnr.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 20 05:15:24 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+- host: bff.listnr.tech
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 10 17:28:36 2026 GMT
+  hsts: false
+domains:
+- domain: listnr.ai
+  dnssec: false
+  caa:
+  - 0 issuewild "letsencrypt.org"
+  - 0 issuewild "pki.goog; cansignhttpexchanges=yes"
+  - 0 issuewild "ssl.com"
+  - 0 issue "comodoca.com"
+  - 0 issue "digicert.com; cansignhttpexchanges=yes"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: listnr.tech
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

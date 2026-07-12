@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/listnr-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: listnrToken
+  type: apiKey
+  in: header
+  parameter: x-listnr-token
+  description: Personal API key generated in the Listnr dashboard at voices.listnr.tech. Keep
+    it server-side; never expose it in the browser or front-end code.
+  sources:
+  - openapi/listnr-openapi.yml

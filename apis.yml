@@ -90,6 +90,10 @@ apis:
     job by jobId. Returns a status of PENDING, IN_PROGRESS, COMPLETED, or FAILED,
     plus the resulting audio URL and audio key when the job finishes.
 common:
+- type: DomainSecurity
+  url: security/listnr-domain-security.yml
+- type: Authentication
+  url: authentication/listnr-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/listnr
 - type: GitHubOrganization
