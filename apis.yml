@@ -90,6 +90,8 @@ apis:
     job by jobId. Returns a status of PENDING, IN_PROGRESS, COMPLETED, or FAILED,
     plus the resulting audio URL and audio key when the job finishes.
 common:
+- type: AgenticAccess
+  url: agentic-access/listnr-agentic-access.yml
 - type: DomainSecurity
   url: security/listnr-domain-security.yml
 - type: Authentication
