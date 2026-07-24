@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: Listnr Text-to-Speech Jobs API
+  description: The Listnr Text-to-Speech API converts SSML text or an article URL into MP3/WAV speech using Listnr's catalog of 1,000+ AI voices across 142+ languages. Conversion can be synchronous (returns an audio URL directly) or asynchronous (returns a jobId that is polled for status). The API also lists available voices and reports async job status. All requests are authenticated with a personal API key generated in the Listnr dashboard (voices.listnr.tech) and passed in an x-listnr-token header. Never expose the API key in front-end code or the browser. Endpoints and parameters in this document are transcribed from Listnr's public API documentation at github.com/team-listnr/text-to-speech-api; request/response schemas are modeled from that documentation and should be verified against the live API.
+  version: '1.0'
+  contact:
+    name: Listnr AI
+    url: https://listnr.ai
+servers:
+- url: https://bff.listnr.tech/api/tts/v1
+  description: Listnr Text-to-Speech API
+security:
+- listnrToken: []
+tags:
+- name: Jobs
+  description: Poll the status of asynchronous conversion jobs.
+paths:
+  /job-status:
+    get:
+      operationId: getJobStatus
+      tags:
+      - Jobs
+      summary: Get async job status
+      description: Returns the status of an asynchronous conversion job by jobId, plus the audio URL and audio key when the job has completed.
+      parameters:
+      - name: jobId
+        in: query
+        required: true
+        description: The identifier of the job to check.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatusResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    JobStatusResponse:
+      type: object
+      properties:
+        jobId:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - COMPLETED
+          - FAILED
+        audioUrl:
+          type: string
+          format: uri
+        audioKey:
+          type: string
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    listnrToken:
+      type: apiKey
+      in: header
+      name: x-listnr-token
+      description: Personal API key generated in the Listnr dashboard at voices.listnr.tech. Keep it server-side; never expose it in the browser or front-end code.
