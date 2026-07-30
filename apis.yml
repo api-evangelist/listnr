@@ -10,7 +10,20 @@ description: Listnr AI is a text-to-speech and AI voice platform offering 1,000+
   asynchronously, lists available voices, and reports async job status. API keys
   are generated from the Listnr dashboard at voices.listnr.tech and passed via an
   x-listnr-token header.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/listnr.png
 tags:
 - AI
 - Text to Speech
@@ -23,72 +36,60 @@ created: '2026-07-11'
 modified: '2026-07-11'
 specificationVersion: '0.19'
 apis:
-- aid: listnr:listnr-text-to-speech-api
-  name: Listnr Text-to-Speech API
-  tags:
-  - Text to Speech
-  - Speech Synthesis
-  - Audio
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: listnr:listnr-jobs-api
+  name: Listnr Jobs API
+  description: Poll the status of asynchronous conversion jobs.
   humanURL: https://listnr.ai/text-to-speech-api
   baseURL: https://bff.listnr.tech/api/tts/v1
-  properties:
-  - url: https://listnr.ai/text-to-speech-api
-    type: Documentation
-  - url: https://github.com/team-listnr/text-to-speech-api
-    type: APIReference
-  - url: openapi/listnr-openapi.yml
-    type: OpenAPI
-  - url: collections/listnr.postman_collection.json
-    type: PostmanCollection
-  - url: collections/listnr.opencollection.json
-    type: OpenCollection
-  description: Convert SSML text or an article URL into MP3/WAV speech using a
-    chosen voice, voice style, speed, and sample rate. Synchronous endpoints
-    return an audio URL directly; asynchronous endpoints return a jobId to poll.
-    Endpoints are confirmed from Listnr's public GitHub API documentation.
-- aid: listnr:listnr-voices-api
-  name: Listnr Voices API
-  tags:
-  - Voices
-  - Languages
-  - Catalog
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://github.com/team-listnr/text-to-speech-api
-  baseURL: https://bff.listnr.tech/api/tts/v1
-  properties:
-  - url: https://github.com/team-listnr/text-to-speech-api
-    type: APIReference
-  - url: openapi/listnr-openapi.yml
-    type: OpenAPI
-  - url: collections/listnr.postman_collection.json
-    type: PostmanCollection
-  - url: collections/listnr.opencollection.json
-    type: OpenCollection
-  description: List the voices available on Listnr, optionally filtered by
-    language, gender, and style. Each voice returns its identifier, language,
-    gender, and supported voice styles for use with the Text-to-Speech API.
-- aid: listnr:listnr-audio-jobs-api
-  name: Listnr Audio Jobs API
   tags:
   - Jobs
-  - Async
-  - Status
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://github.com/team-listnr/text-to-speech-api
-  baseURL: https://bff.listnr.tech/api/tts/v1
   properties:
-  - url: https://github.com/team-listnr/text-to-speech-api
-    type: APIReference
-  - url: openapi/listnr-openapi.yml
-    type: OpenAPI
-  - url: collections/listnr.postman_collection.json
-    type: PostmanCollection
-  - url: collections/listnr.opencollection.json
-    type: OpenCollection
-  description: Poll the status of an asynchronous text-to-speech or URL-to-speech
-    job by jobId. Returns a status of PENDING, IN_PROGRESS, COMPLETED, or FAILED,
-    plus the resulting audio URL and audio key when the job finishes.
+  - type: OpenAPI
+    url: openapi/listnr-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://listnr.ai/text-to-speech-api
+  - type: APIReference
+    url: https://github.com/team-listnr/text-to-speech-api
+  - type: PostmanCollection
+    url: collections/listnr.postman_collection.json
+  - type: OpenCollection
+    url: collections/listnr.opencollection.json
+- aid: listnr:listnr-text-to-speech-api
+  name: Listnr Text-to-Speech API
+  description: Convert SSML text or an article URL into audio.
+  humanURL: https://listnr.ai/text-to-speech-api
+  baseURL: https://bff.listnr.tech/api/tts/v1
+  tags:
+  - Text-to-Speech
+  properties:
+  - type: OpenAPI
+    url: openapi/listnr-text-to-speech-api-openapi.yml
+  - type: Documentation
+    url: https://listnr.ai/text-to-speech-api
+  - type: APIReference
+    url: https://github.com/team-listnr/text-to-speech-api
+  - type: PostmanCollection
+    url: collections/listnr.postman_collection.json
+  - type: OpenCollection
+    url: collections/listnr.opencollection.json
+- aid: listnr:listnr-voices-api
+  name: Listnr Voices API
+  description: List the AI voices available on Listnr.
+  humanURL: https://listnr.ai/text-to-speech-api
+  baseURL: https://bff.listnr.tech/api/tts/v1
+  tags:
+  - Voices
+  properties:
+  - type: OpenAPI
+    url: openapi/listnr-voices-api-openapi.yml
+  - type: Documentation
+    url: https://listnr.ai/text-to-speech-api
+  - type: APIReference
+    url: https://github.com/team-listnr/text-to-speech-api
+  - type: PostmanCollection
+    url: collections/listnr.postman_collection.json
+  - type: OpenCollection
+    url: collections/listnr.opencollection.json
 common:
 - type: AgenticAccess
   url: agentic-access/listnr-agentic-access.yml
