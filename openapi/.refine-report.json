@@ -1,0 +1,18 @@
+{
+  "provider": "listnr",
+  "sources": [
+    "listnr-jobs-api-openapi.yml",
+    "listnr-text-to-speech-api-openapi.yml",
+    "listnr-voices-api-openapi.yml"
+  ],
+  "outputs": [
+    "listnr-jobs-api-openapi.yml",
+    "listnr-text-to-speech-api-openapi.yml",
+    "listnr-voices-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
