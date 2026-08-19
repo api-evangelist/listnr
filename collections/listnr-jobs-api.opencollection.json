@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listnr Text-to-Speech Jobs API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-listnr-token",
+      "value": "{{x-listnr-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get async job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bff.listnr.tech/api/tts/v1/job-status",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "query",
+                "description": "The identifier of the job to check."
+              }
+            ]
+          },
+          "docs": "Returns the status of an asynchronous conversion job by jobId, plus the audio URL and audio key when the job has completed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

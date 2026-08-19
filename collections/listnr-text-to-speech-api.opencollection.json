@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listnr Jobs Text-to-Speech API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-listnr-token",
+      "value": "{{x-listnr-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Text-to-Speech",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Convert SSML text to speech (synchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://bff.listnr.tech/api/tts/v1/convert-text",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synchronously converts SSML text into audio and returns the resulting audio URL."
+        },
+        {
+          "info": {
+            "name": "Convert SSML text to speech (asynchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://bff.listnr.tech/api/tts/v1/convert-text-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues an asynchronous conversion of SSML text and returns a jobId to poll via the job-status endpoint."
+        },
+        {
+          "info": {
+            "name": "Convert an article URL to speech (synchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://bff.listnr.tech/api/tts/v1/convert-url",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synchronously converts the readable content of an article URL into audio and returns the resulting audio URL."
+        },
+        {
+          "info": {
+            "name": "Convert an article URL to speech (asynchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://bff.listnr.tech/api/tts/v1/convert-url-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues an asynchronous conversion of an article URL and returns a jobId to poll via the job-status endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

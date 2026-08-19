@@ -1,0 +1,649 @@
+{
+  "item": [
+    {
+      "id": "b7fbd0fb-155d-4722-aecb-b322ead41bca",
+      "name": "Text-to-Speech",
+      "description": {
+        "content": "Convert SSML text or an article URL into audio.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4815b67a-66b0-4984-aa4b-6ab434c78541",
+          "name": "Convert SSML text to speech (synchronous)",
+          "request": {
+            "name": "Convert SSML text to speech (synchronous)",
+            "description": {
+              "content": "Synchronously converts SSML text into audio and returns the resulting audio URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "convert-text"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"voice\": \"<string>\",\n  \"ssml\": \"<string>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e8d84ec2-43a7-42f6-b0a2-a3407c07d899",
+              "name": "Audio generated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert-text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice\": \"<string>\",\n  \"ssml\": \"<string>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"audioUrl\": \"https://rqwKZVOTpYCkHiycnIRAHkknYb.fxdfMjRd65MwL5aImSWGonChnqz3IxXUakuijgjtcsM1sn7QqzyoPEMCP\",\n  \"audioKey\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49f7005a-a0e5-4415-9844-25987c84644a",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert-text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice\": \"<string>\",\n  \"ssml\": \"<string>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37deae8d-b480-4cbc-8a66-3170ae83881d",
+          "name": "Convert SSML text to speech (asynchronous)",
+          "request": {
+            "name": "Convert SSML text to speech (asynchronous)",
+            "description": {
+              "content": "Queues an asynchronous conversion of SSML text and returns a jobId to poll via the job-status endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "convert-text-async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"voice\": \"<string>\",\n  \"ssml\": \"<string>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7f51094b-a385-490e-908c-ad1a8b0708b5",
+              "name": "Job accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert-text-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice\": \"<string>\",\n  \"ssml\": \"<string>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"string\",\n  \"audioKey\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f94ac543-50f2-4d6d-9094-ffc57e7f4420",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert-text-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice\": \"<string>\",\n  \"ssml\": \"<string>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84d44a17-9829-40f1-87d9-e91657f16bb9",
+          "name": "Convert an article URL to speech (synchronous)",
+          "request": {
+            "name": "Convert an article URL to speech (synchronous)",
+            "description": {
+              "content": "Synchronously converts the readable content of an article URL into audio and returns the resulting audio URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "convert-url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"voice\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bba87129-077a-46bc-8ac2-4262be103fb2",
+              "name": "Audio generated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"audioUrl\": \"https://rqwKZVOTpYCkHiycnIRAHkknYb.fxdfMjRd65MwL5aImSWGonChnqz3IxXUakuijgjtcsM1sn7QqzyoPEMCP\",\n  \"audioKey\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab22f323-2915-4987-a25f-fdb8b6bdd35a",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecf3d09e-dd24-44d7-aec7-de5d53a14e64",
+          "name": "Convert an article URL to speech (asynchronous)",
+          "request": {
+            "name": "Convert an article URL to speech (asynchronous)",
+            "description": {
+              "content": "Queues an asynchronous conversion of an article URL and returns a jobId to poll via the job-status endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "convert-url-async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"voice\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d2dc6080-9c1c-40cd-945d-1be501a93d7f",
+              "name": "Job accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert-url-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"string\",\n  \"audioKey\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8cff15e-a040-4c78-8568-c87d95de7e3d",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert-url-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"voiceStyle\": \"<string>\",\n  \"globalSpeed\": \"<string>\",\n  \"audioFormat\": \"<string>\",\n  \"audioSampleRate\": \"<integer>\",\n  \"audioKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://bff.listnr.tech/api/tts/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-listnr-token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "68a2d607-18f7-4b43-8dc7-6c47bbfd3cfb",
+    "name": "Listnr Jobs Text-to-Speech API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Listnr Text-to-Speech API converts SSML text or an article URL into MP3/WAV speech using Listnr's catalog of 1,000+ AI voices across 142+ languages. Conversion can be synchronous (returns an audio URL directly) or asynchronous (returns a jobId that is polled for status). The API also lists available voices and reports async job status. All requests are authenticated with a personal API key generated in the Listnr dashboard (voices.listnr.tech) and passed in an x-listnr-token header. Never expose the API key in front-end code or the browser. Endpoints and parameters in this document are transcribed from Listnr's public API documentation at github.com/team-listnr/text-to-speech-api; request/response schemas are modeled from that documentation and should be verified against the live API.\n\nContact Support:\n Name: Listnr AI",
+      "type": "text/plain"
+    }
+  }
+}

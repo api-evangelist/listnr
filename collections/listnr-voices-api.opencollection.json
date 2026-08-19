@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listnr Text-to-Speech Jobs Voices API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-listnr-token",
+      "value": "{{x-listnr-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Voices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available voices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bff.listnr.tech/api/tts/v1/available-voices",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "query",
+                "description": "Filter voices by language."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "Filter voices by gender."
+              },
+              {
+                "name": "style",
+                "value": "",
+                "type": "query",
+                "description": "Filter voices by style or tone."
+              }
+            ]
+          },
+          "docs": "Returns the voices available on Listnr, optionally filtered by language, gender, and style."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

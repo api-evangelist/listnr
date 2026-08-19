@@ -1,0 +1,187 @@
+{
+  "item": [
+    {
+      "id": "460aae70-255c-4005-96c2-13ec1bd2527c",
+      "name": "Jobs",
+      "description": {
+        "content": "Poll the status of asynchronous conversion jobs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f59ce19d-a236-4daa-953b-f632ad1f96e0",
+          "name": "Get async job status",
+          "request": {
+            "name": "Get async job status",
+            "description": {
+              "content": "Returns the status of an asynchronous conversion job by jobId, plus the audio URL and audio key when the job has completed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "job-status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "jobId",
+                  "value": "<string>",
+                  "description": "(Required) The identifier of the job to check."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "160aaf84-d570-40c9-a7c8-e49e102bb69c",
+              "name": "Job status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jobId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"string\",\n  \"status\": \"COMPLETED\",\n  \"audioUrl\": \"https://isWvjPsqhdPAamKIRblLgKdwMsajUBae.erzuhf29eyJforcayecVuObN4qka\",\n  \"audioKey\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9b0aae8-fe1e-4a9e-abc6-dc5585316829",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jobId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-listnr-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://bff.listnr.tech/api/tts/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-listnr-token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b5bfe7a2-e31f-4357-bdb9-b9b82c55e033",
+    "name": "Listnr Text-to-Speech Jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Listnr Text-to-Speech API converts SSML text or an article URL into MP3/WAV speech using Listnr's catalog of 1,000+ AI voices across 142+ languages. Conversion can be synchronous (returns an audio URL directly) or asynchronous (returns a jobId that is polled for status). The API also lists available voices and reports async job status. All requests are authenticated with a personal API key generated in the Listnr dashboard (voices.listnr.tech) and passed in an x-listnr-token header. Never expose the API key in front-end code or the browser. Endpoints and parameters in this document are transcribed from Listnr's public API documentation at github.com/team-listnr/text-to-speech-api; request/response schemas are modeled from that documentation and should be verified against the live API.\n\nContact Support:\n Name: Listnr AI",
+      "type": "text/plain"
+    }
+  }
+}
