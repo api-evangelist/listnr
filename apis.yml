@@ -10,6 +10,18 @@ description: Listnr AI is a text-to-speech and AI voice platform offering 1,000+
   asynchronously, lists available voices, and reports async job status. API keys
   are generated from the Listnr dashboard at voices.listnr.tech and passed via an
   x-listnr-token header.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
