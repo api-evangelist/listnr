@@ -1,0 +1,54 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Listnr AI",
+    "identifier": "https://listnr.ai",
+    "documentationUrl": "https://listnr.ai/developers"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:listnr.ai:resource:guide",
+      "displayName": "Listnr agent guide",
+      "type": "text/markdown",
+      "url": "https://listnr.ai/AGENTS.md",
+      "description": "Instructions for browsing Listnr and discovering its supported integrations.",
+      "trustManifest": {
+        "identity": "https://listnr.ai",
+        "identityType": "https"
+      }
+    },
+    {
+      "identifier": "urn:air:listnr.ai:resource:studio-mcp",
+      "displayName": "Listnr Studio discovery MCP",
+      "type": "application/mcp-server-card+json",
+      "url": "https://studio.listnr.ai/.well-known/mcp/server-card.json",
+      "description": "Read-only product discovery, pricing and page search. Does not generate video.",
+      "trustManifest": {
+        "identity": "https://listnr.ai",
+        "identityType": "https"
+      }
+    },
+    {
+      "identifier": "urn:air:listnr.ai:resource:studio-api",
+      "displayName": "Listnr Studio public API",
+      "type": "application/vnd.oai.openapi+json",
+      "url": "https://studio.listnr.ai/openapi.json",
+      "description": "Studio public API reference; consult operation authentication requirements.",
+      "trustManifest": {
+        "identity": "https://listnr.ai",
+        "identityType": "https"
+      }
+    },
+    {
+      "identifier": "urn:air:listnr.ai:resource:tts-skill",
+      "displayName": "Listnr TTS skill",
+      "type": "text/markdown",
+      "url": "https://raw.githubusercontent.com/team-listnr/text-to-speech-api/master/skills/listnr-tts/SKILL.md",
+      "description": "Official text-to-speech integration guide using x-listnr-token.",
+      "trustManifest": {
+        "identity": "https://listnr.ai",
+        "identityType": "https"
+      }
+    }
+  ]
+}
