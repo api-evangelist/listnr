@@ -48,6 +48,7 @@ conformance:
     informational:
     - '[Listnr Studio public API] Media type ''application/vnd.oai.openapi+json'' is a valid application
       extension media type. ARD permits extension types without core registration.'
+  did_web: null
 catalog:
   host_display_name: Listnr AI
   host_identifier: https://listnr.ai
