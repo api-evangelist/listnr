@@ -100,6 +100,8 @@ apis:
   humanURL: https://listnr.ai/text-to-speech-api
   baseURL: https://bff.listnr.tech/api/tts/v1
   tags:
+  - Voice
+  tags_raw:
   - Voices
   properties:
   - type: OpenAPI
