@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Listnr Text-to-Speech Jobs Voices API
-  description: The Listnr Text-to-Speech API converts SSML text or an article URL into MP3/WAV speech using Listnr's catalog of 1,000+ AI voices across 142+ languages. Conversion can be synchronous (returns an audio URL directly) or asynchronous (returns a jobId that is polled for status). The API also lists available voices and reports async job status. All requests are authenticated with a personal API key generated in the Listnr dashboard (voices.listnr.tech) and passed in an x-listnr-token header. Never expose the API key in front-end code or the browser. Endpoints and parameters in this document are transcribed from Listnr's public API documentation at github.com/team-listnr/text-to-speech-api; request/response schemas are modeled from that documentation and should be verified against the live API.
+  title: Listnr Text-to-Speech Voices API
+  description: The Listnr Text-to-Speech API converts SSML text or an article URL into MP3/WAV speech using Listnr's catalog of 1,000+ AI voices across 142+ languages.
   version: '1.0'
   contact:
     name: Listnr AI
@@ -52,6 +52,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    VoicesResponse:
+      type: object
+      properties:
+        voices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Voice'
     Voice:
       type: object
       properties:
@@ -69,20 +83,6 @@ components:
           description: Voice styles supported by this voice.
           items:
             type: string
-    VoicesResponse:
-      type: object
-      properties:
-        voices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Voice'
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid API key.

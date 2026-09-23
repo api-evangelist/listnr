@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Listnr Jobs Text-to-Speech API
-  description: The Listnr Text-to-Speech API converts SSML text or an article URL into MP3/WAV speech using Listnr's catalog of 1,000+ AI voices across 142+ languages. Conversion can be synchronous (returns an audio URL directly) or asynchronous (returns a jobId that is polled for status). The API also lists available voices and reports async job status. All requests are authenticated with a personal API key generated in the Listnr dashboard (voices.listnr.tech) and passed in an x-listnr-token header. Never expose the API key in front-end code or the browser. Endpoints and parameters in this document are transcribed from Listnr's public API documentation at github.com/team-listnr/text-to-speech-api; request/response schemas are modeled from that documentation and should be verified against the live API.
+  title: Listnr Text To Speech API
+  description: The Listnr Text-to-Speech API converts SSML text or an article URL into MP3/WAV speech using Listnr's catalog of 1,000+ AI voices across 142+ languages.
   version: '1.0'
   contact:
     name: Listnr AI
@@ -12,14 +12,14 @@ servers:
 security:
 - listnrToken: []
 tags:
-- name: Text-to-Speech
+- name: Text To Speech
   description: Convert SSML text or an article URL into audio.
 paths:
   /convert-text:
     post:
       operationId: convertText
       tags:
-      - Text-to-Speech
+      - Text To Speech
       summary: Convert SSML text to speech (synchronous)
       description: Synchronously converts SSML text into audio and returns the resulting audio URL.
       requestBody:
@@ -41,7 +41,7 @@ paths:
     post:
       operationId: convertTextAsync
       tags:
-      - Text-to-Speech
+      - Text To Speech
       summary: Convert SSML text to speech (asynchronous)
       description: Queues an asynchronous conversion of SSML text and returns a jobId to poll via the job-status endpoint.
       requestBody:
@@ -63,7 +63,7 @@ paths:
     post:
       operationId: convertUrl
       tags:
-      - Text-to-Speech
+      - Text To Speech
       summary: Convert an article URL to speech (synchronous)
       description: Synchronously converts the readable content of an article URL into audio and returns the resulting audio URL.
       requestBody:
@@ -85,7 +85,7 @@ paths:
     post:
       operationId: convertUrlAsync
       tags:
-      - Text-to-Speech
+      - Text To Speech
       summary: Convert an article URL to speech (asynchronous)
       description: Queues an asynchronous conversion of an article URL and returns a jobId to poll via the job-status endpoint.
       requestBody:
@@ -105,46 +105,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ConvertTextRequest:
-      type: object
-      required:
-      - voice
-      - ssml
-      properties:
-        voice:
-          type: string
-          description: The voice identifier to synthesize with.
-        ssml:
-          type: string
-          description: The text to convert, in SSML format with paragraph tags.
-        voiceStyle:
-          type: string
-          description: Optional tone or accent of the voice.
-        globalSpeed:
-          type: string
-          description: Playback speed as a percentage string, e.g. "100%" (20-200).
-        audioFormat:
-          type: string
-          enum:
-          - mp3
-          - wav
-          description: Output audio format.
-        audioSampleRate:
-          type: integer
-          enum:
-          - 24000
-          - 48000
-          description: Output audio sample rate in Hz.
-        audioKey:
-          type: string
-          description: Optional key referencing an existing audio file to update.
-    Error:
+    SyncConversionResponse:
       type: object
       properties:
         success:
           type: boolean
-        message:
+        audioUrl:
           type: string
+          format: uri
+          description: URL of the generated audio file.
+        audioKey:
+          type: string
+          description: Key identifying the generated audio file.
     AsyncConversionResponse:
       type: object
       properties:
@@ -188,18 +160,46 @@ components:
         audioKey:
           type: string
           description: Optional key referencing an existing audio file to update.
-    SyncConversionResponse:
+    Error:
       type: object
       properties:
         success:
           type: boolean
-        audioUrl:
+        message:
           type: string
-          format: uri
-          description: URL of the generated audio file.
+    ConvertTextRequest:
+      type: object
+      required:
+      - voice
+      - ssml
+      properties:
+        voice:
+          type: string
+          description: The voice identifier to synthesize with.
+        ssml:
+          type: string
+          description: The text to convert, in SSML format with paragraph tags.
+        voiceStyle:
+          type: string
+          description: Optional tone or accent of the voice.
+        globalSpeed:
+          type: string
+          description: Playback speed as a percentage string, e.g. "100%" (20-200).
+        audioFormat:
+          type: string
+          enum:
+          - mp3
+          - wav
+          description: Output audio format.
+        audioSampleRate:
+          type: integer
+          enum:
+          - 24000
+          - 48000
+          description: Output audio sample rate in Hz.
         audioKey:
           type: string
-          description: Key identifying the generated audio file.
+          description: Optional key referencing an existing audio file to update.
   responses:
     Unauthorized:
       description: Missing or invalid API key.

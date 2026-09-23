@@ -1,0 +1,26 @@
+# Front Door AI Index — listnr — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: listnr
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: listnr.ai
+  final_host: listnr.ai
+  ownership: own
+  owner: listnr
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 23
+  host_score: 23
+  density: 9.24
+  words: 2488
+  tiers:
+    agentic: 3
+    core: 20
+    model: 0
+  ambiguous: 0
+  top_terms:
+    AI: 20
+    prompts: 3
