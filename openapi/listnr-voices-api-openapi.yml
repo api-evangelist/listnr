@@ -52,6 +52,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    VoicesResponse:
+      type: object
+      properties:
+        voices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Voice'
     Voice:
       type: object
       properties:
@@ -69,20 +83,6 @@ components:
           description: Voice styles supported by this voice.
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-    VoicesResponse:
-      type: object
-      properties:
-        voices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Voice'
   responses:
     Unauthorized:
       description: Missing or invalid API key.
