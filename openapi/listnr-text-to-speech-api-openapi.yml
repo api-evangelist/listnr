@@ -104,26 +104,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    SyncConversionResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        audioUrl:
-          type: string
-          format: uri
-          description: URL of the generated audio file.
-        audioKey:
-          type: string
-          description: Key identifying the generated audio file.
     ConvertUrlRequest:
       type: object
       required:
@@ -167,6 +148,18 @@ components:
         audioKey:
           type: string
           description: Key that will identify the generated audio file.
+    SyncConversionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        audioUrl:
+          type: string
+          format: uri
+          description: URL of the generated audio file.
+        audioKey:
+          type: string
+          description: Key identifying the generated audio file.
     Error:
       type: object
       properties:
@@ -207,6 +200,13 @@ components:
         audioKey:
           type: string
           description: Optional key referencing an existing audio file to update.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     listnrToken:
       type: apiKey
