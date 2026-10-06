@@ -53,7 +53,7 @@ tags_raw:
 - Audio
 - Voiceover
 created: '2026-07-11'
-modified: '2026-07-11'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: listnr:listnr-jobs-api
@@ -115,6 +115,8 @@ apis:
   - type: OpenCollection
     url: collections/listnr.opencollection.json
 common:
+- url: https://listnr.ai/blog
+  type: Blog
 - type: AgenticAccess
   url: agentic-access/listnr-agentic-access.yml
 - type: DomainSecurity
