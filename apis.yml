@@ -115,6 +115,8 @@ apis:
   - type: OpenCollection
     url: collections/listnr.opencollection.json
 common:
+- type: Pricing
+  url: https://listnr.ai/pricing
 - url: https://listnr.ai/blog
   type: Blog
 - type: AgenticAccess
