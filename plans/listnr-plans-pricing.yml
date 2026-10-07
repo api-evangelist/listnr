@@ -14,6 +14,7 @@ delivery:
   delivery: managed
   method: page
   read: '2026-10-07'
+  managed_tier: Individual
 published: true
 note: Yearly billing shown as $190/$390/$990 annually (2 months free). Enterprise/volume pricing is quote-based.
 plan_count: 5
