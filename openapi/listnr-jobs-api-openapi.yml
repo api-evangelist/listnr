@@ -47,13 +47,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
     JobStatusResponse:
       type: object
       properties:
@@ -70,6 +63,13 @@ components:
           type: string
           format: uri
         audioKey:
+          type: string
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
           type: string
   securitySchemes:
     listnrToken:
