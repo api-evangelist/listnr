@@ -1,0 +1,374 @@
+openapi: 3.2.0
+info:
+  title: Listnr Studio Catalog API
+  version: 1.0.0
+  description: Public read API for Listnr Studio. Catalog, pricing, and docs are anonymous. Video generation is not performed on this host; send people to /create?tool=. Anonymous reads are capped at 60 requests per IP per minute on /api/v1, /mcp, and /ask (20 writes). Exceeding the cap returns 429 with RateLimit and Retry-After.
+  contact:
+    name: Listnr Studio
+    email: support@listnr.ai
+    url: https://studio.listnr.ai/contact
+servers:
+- url: https://studio.listnr.ai/api/v1
+  description: Public sandbox (read-only)
+security: []
+tags:
+- name: Catalog
+  description: Tools and marketing pages
+paths:
+  /tools:
+    get:
+      operationId: listStudioTools
+      tags:
+      - Catalog
+      summary: List Studio tools
+      description: Anonymous list of public Listnr Studio tools for function calling.
+      parameters:
+      - name: category
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Optional catalog category id
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Case-insensitive search over tool label and id
+      responses:
+        '200':
+          description: Tool collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolList'
+        '429':
+          description: Too many requests from this IP. Honor RateLimit and Retry-After.
+          headers:
+            RateLimit:
+              schema:
+                type: string
+              description: IETF RateLimit header, e.g. limit=60, remaining=0, reset=12
+            RateLimit-Policy:
+              schema:
+                type: string
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tools/{toolId}:
+    get:
+      operationId: getStudioTool
+      tags:
+      - Catalog
+      summary: Get one Studio tool
+      description: Typed tool record including marketing path and create handoff.
+      parameters:
+      - name: toolId
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - prompt-to-video
+          - voiceover-video
+          - ai-movie-maker
+          - ai-short-drama-generator
+          - cinematic-videos
+          - sora-2
+          - veo3
+          - seedance-2
+          - seedance-2-5
+          - video-podcast-generator
+          - kids-drawing-animation
+          - 2d-animation-maker
+          - ai-animation-generator-from-image
+          - ai-animation-video-generator
+          - ai-cartoon-video-generator
+          - ai-cat-video-generator
+          - ai-dog-video-generator
+          - ai-image-animator
+          - ai-movie-trailer-maker
+          - ai-superhero-generator
+          - ai-video-generator
+          - animal-ai-video-generator
+          - anime-video-generator
+          - chatgpt-video-generator
+          - create-asmr-video
+          - create-street-interview-video
+          - static-background
+          - kids-message-generator
+          - pov-video-generator
+          - video-selfie-maker
+          - voiceover-to-video-ai
+          - text-to-video
+          - faceless-ai-video-generator
+          - music-to-video
+          - lyrics-to-music-video
+          - animated-lyrics-video
+          - generative-motion-graphics
+          - instrumental-music-visualizer
+          - motion-graphics-video
+          - youtube-music-visualizer
+          - ai-drill-video-generator
+          - ai-edm-video-generator
+          - ai-hip-hop-video-generator
+          - ai-jazz-video-generator
+          - ai-lofi-video-generator
+          - ai-metal-video-generator
+          - ai-phonk-video-generator
+          - ai-rock-video-generator
+          - ai-techno-video-generator
+          - rap-video-generator
+          - soundcloud-to-video
+          - spotify-to-video
+          - suno-to-video
+          - music-videos-for-kids
+          - news-video-generator
+          - create-video-quiz
+          - gaming-video-maker
+          - media-to-story
+          - reddit-post-to-video
+          - tweet-linkedin-to-video
+          - youtube-long-to-shorts
+          - ai-reel-generator
+          - ai-roast-generator
+          - ai-youtube-shorts-generator
+          - linkedin-post-to-video
+          - long-video-to-short-video-ai
+          - repurpose-instagram-reels
+          - repurpose-youtube-shorts
+          - short-video-maker
+          - social-media-video-maker
+          - youtube-to-instagram-converter
+          - youtube-to-tiktok-converter
+          - youtube-video-summarizer
+          - tiktok-video-generator
+          - add-caption-to-video
+          - add-image-to-video
+          - add-text-to-video
+          - ai-vfx-editor
+          - flip-video
+          - increase-video-volume
+          - loop-video
+          - motion-transfer
+          - resize-video
+          - rotate-video
+          - video-face-swap
+          - voice-changer
+          - comment-silent-video
+          - translate-video
+          - image-to-video-effect
+          - ai-sports-highlights-generator
+          - ai-subtitle-generator
+          - audio-enhancer
+          - image-sequence-to-video-converter
+          - photo-to-video-converter
+          - tiktok-subtitle-generator
+          - talking-avatar
+          - reaction-video
+          - ai-celebrity-video-generator
+          - ai-debate-generator
+          - ai-deepfake-video-maker
+          - ai-santa-video-generator
+          - talking-baby-ai
+          - ai-ugc-avatar-generator
+          - voiceover-video-maker
+          - podcast-ai-clip-generator
+          - audio-video-to-video
+          - article-to-video
+          - blog-to-video-converter
+          - create-video-for-amazon-products
+          - create-business-animation-video
+          - create-product-videos-for-shopify
+          - create-product-videos-from-website
+          - product-hunt-launch-ai-video
+          - real-estate-marketing-video
+          - screenshot-to-video-ad
+          - ad-generator
+          - pdf-to-video
+          - ugc-ad-generator
+          - website-to-video
+          - food-to-nutrition-video
+          - ai-video-presentation-maker
+          - educational-video-maker
+          - explainer-video-maker
+          - whiteboard-animation-maker
+          - course-video-generator
+          - slideshow-video-maker
+          - how-to-video-maker
+          - science-explainer-video
+          - history-lesson-video-maker
+          - tutorial-video-generator
+          - ai-satisfying-video-generator
+          - create-minecraft-parkour-video
+          - italian-brainrot-generator
+          - pdf-to-brainrot
+          - space-background-video-maker
+          - subway-surfers-video-generator
+          - temple-run-video-generator
+          - text-to-brainrot-video-generator
+          - create-attack-on-titan-videos
+          - create-dragonball-videos
+          - create-dungeons-and-dragons-videos
+          - create-fortnite-videos
+          - create-star-wars-videos
+          - create-stranger-things-videos
+          - create-warhammer-40k-videos
+          - disney-pixar-video-generator
+          - create-game-of-thrones-videos
+          - create-harry-potter-videos
+          - create-manga-video
+          - create-marvel-videos
+          - create-one-piece-videos
+          - create-pokemon-videos
+          - create-rick-and-morty-videos
+          - create-short-from-your-stream
+          - ghibli-ai-video-generator
+          - minecraft-ai-video-generator
+          - naruto-ai-generator
+          - roblox-animation-maker
+        description: Catalog tool id
+      responses:
+        '200':
+          description: Tool
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tool'
+        '404':
+          description: Unknown tool
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too many requests from this IP. Honor RateLimit and Retry-After.
+          headers:
+            RateLimit:
+              schema:
+                type: string
+              description: IETF RateLimit header, e.g. limit=60, remaining=0, reset=12
+            RateLimit-Policy:
+              schema:
+                type: string
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /pages:
+    get:
+      operationId: listStudioPages
+      tags:
+      - Catalog
+      summary: List public marketing pages
+      description: Routes agents can cite, including markdown twins.
+      responses:
+        '200':
+          description: Page list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageList'
+        '429':
+          description: Too many requests from this IP. Honor RateLimit and Retry-After.
+          headers:
+            RateLimit:
+              schema:
+                type: string
+              description: IETF RateLimit header, e.g. limit=60, remaining=0, reset=12
+            RateLimit-Policy:
+              schema:
+                type: string
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            hint:
+              type: string
+            docs:
+              type: string
+              format: uri
+            auth:
+              type: string
+              format: uri
+    PageList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+    Tool:
+      type: object
+      required:
+      - id
+      - label
+      - path
+      - createHref
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        path:
+          type: string
+        markdownPath:
+          type: string
+        createHref:
+          type: string
+    ToolList:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tool'
+  securitySchemes:
+    bearerAuth:
+      type: oauth2
+      description: Session or agent token. Catalog GET routes do not require it.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://studio.listnr.ai/login
+          tokenUrl: https://studio.listnr.ai/api/v1/oauth/token
+          scopes:
+            tools:read: Read tools
+            catalog:read: Read catalog
+            docs:read: Read docs
+            videos:write: Reserved for authenticated Studio projects; not granted on the public host

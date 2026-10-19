@@ -1,24 +1,20 @@
 {
   "provider": "listnr",
   "sources": [
-    "_original/listnr-openapi.yml"
+    "_original/listnr-openapi.json"
   ],
   "outputs": [
-    "listnr-jobs-api-openapi.yml",
-    "listnr-text-to-speech-api-openapi.yml",
-    "listnr-voices-api-openapi.yml"
+    "listnr-agent-api-openapi.yml",
+    "listnr-billing-api-openapi.yml",
+    "listnr-catalog-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "listnr-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "listnr-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+3 apis, 3 total)"
   ],
-  "skipped": [
-    "listnr-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "listnr-text-to-speech-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "listnr-voices-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }

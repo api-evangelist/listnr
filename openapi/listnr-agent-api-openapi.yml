@@ -1,0 +1,242 @@
+openapi: 3.2.0
+info:
+  title: Listnr Studio Agent API
+  version: 1.0.0
+  description: Public read API for Listnr Studio. Catalog, pricing, and docs are anonymous. Video generation is not performed on this host; send people to /create?tool=. Anonymous reads are capped at 60 requests per IP per minute on /api/v1, /mcp, and /ask (20 writes). Exceeding the cap returns 429 with RateLimit and Retry-After.
+  contact:
+    name: Listnr Studio
+    email: support@listnr.ai
+    url: https://studio.listnr.ai/contact
+servers:
+- url: https://studio.listnr.ai/api/v1
+  description: Public sandbox (read-only)
+security: []
+tags:
+- name: Agent
+  description: Discovery and authentication hints
+paths:
+  /:
+    get:
+      operationId: getApiRoot
+      tags:
+      - Agent
+      summary: API service descriptor
+      description: Returns collections, docs, and authentication pointers.
+      responses:
+        '200':
+          description: Service descriptor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDescriptor'
+        '429':
+          description: Too many requests from this IP. Honor RateLimit and Retry-After.
+          headers:
+            RateLimit:
+              schema:
+                type: string
+              description: IETF RateLimit header, e.g. limit=60, remaining=0, reset=12
+            RateLimit-Policy:
+              schema:
+                type: string
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /videos:
+    get:
+      operationId: listStudioVideos
+      tags:
+      - Agent
+      summary: List user videos (protected)
+      description: Protected collection. Anonymous calls receive 401 with WWW-Authenticate pointing at resource metadata. Generation is not available here.
+      security:
+      - bearerAuth:
+        - videos:write
+      responses:
+        '401':
+          description: Bearer auth required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too many requests from this IP. Honor RateLimit and Retry-After.
+          headers:
+            RateLimit:
+              schema:
+                type: string
+              description: IETF RateLimit header, e.g. limit=60, remaining=0, reset=12
+            RateLimit-Policy:
+              schema:
+                type: string
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /oauth/token:
+    post:
+      operationId: exchangeStudioToken
+      tags:
+      - Agent
+      summary: Exchange an authorization code
+      description: Token endpoint declared for agents. The public host does not mint generation credentials. Retry with the same Idempotency-Key to avoid duplicate exchanges.
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                code:
+                  type: string
+      responses:
+        '400':
+          description: Token is not issued on the public host
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too many requests from this IP. Honor RateLimit and Retry-After.
+          headers:
+            RateLimit:
+              schema:
+                type: string
+              description: IETF RateLimit header, e.g. limit=60, remaining=0, reset=12
+            RateLimit-Policy:
+              schema:
+                type: string
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /handoffs:
+    post:
+      operationId: createStudioHandoff
+      tags:
+      - Agent
+      summary: Create a Studio create-handoff URL
+      description: Idempotent write that returns a /create?tool= URL. It does not generate video or charge credits. Retry with the same Idempotency-Key to receive the original handoff.
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      - name: toolId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Catalog tool id. Defaults to prompt-to-video.
+      responses:
+        '201':
+          description: Handoff created or replayed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handoff'
+        '429':
+          description: Too many requests from this IP. Honor RateLimit and Retry-After.
+          headers:
+            RateLimit:
+              schema:
+                type: string
+              description: IETF RateLimit header, e.g. limit=60, remaining=0, reset=12
+            RateLimit-Policy:
+              schema:
+                type: string
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ServiceDescriptor:
+      type: object
+      properties:
+        name:
+          type: string
+        docs:
+          type: string
+          format: uri
+        openapi:
+          type: string
+          format: uri
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            hint:
+              type: string
+            docs:
+              type: string
+              format: uri
+            auth:
+              type: string
+              format: uri
+    Handoff:
+      type: object
+      required:
+      - toolId
+      - createHref
+      - url
+      properties:
+        toolId:
+          type: string
+        createHref:
+          type: string
+        url:
+          type: string
+          format: uri
+        billed:
+          type: boolean
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Client-supplied key for write retries. Repeating a POST with the same key returns the original result instead of creating a duplicate.
+  securitySchemes:
+    bearerAuth:
+      type: oauth2
+      description: Session or agent token. Catalog GET routes do not require it.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://studio.listnr.ai/login
+          tokenUrl: https://studio.listnr.ai/api/v1/oauth/token
+          scopes:
+            tools:read: Read tools
+            catalog:read: Read catalog
+            docs:read: Read docs
+            videos:write: Reserved for authenticated Studio projects; not granted on the public host

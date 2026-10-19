@@ -56,18 +56,16 @@ created: '2026-07-11'
 modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
-- aid: listnr:listnr-jobs-api
-  name: Listnr Jobs API
-  description: Poll the status of asynchronous conversion jobs.
+- aid: listnr:listnr-agent-api
+  name: Listnr Agent API
+  description: Discovery and authentication hints
   humanURL: https://listnr.ai/text-to-speech-api
   baseURL: https://bff.listnr.tech/api/tts/v1
   tags:
-  - Job
-  tags_raw:
-  - Jobs
+  - Agent
   properties:
   - type: OpenAPI
-    url: openapi/listnr-jobs-api-openapi.yml
+    url: openapi/listnr-agent-api-openapi.yml
   - type: Documentation
     url: https://listnr.ai/text-to-speech-api
   - type: APIReference
@@ -76,16 +74,16 @@ apis:
     url: collections/listnr.postman_collection.json
   - type: OpenCollection
     url: collections/listnr.opencollection.json
-- aid: listnr:listnr-text-to-speech-api
-  name: Listnr Text-to-Speech API
-  description: Convert SSML text or an article URL into audio.
+- aid: listnr:listnr-billing-api
+  name: Listnr Billing API
+  description: Published plan and credit limits
   humanURL: https://listnr.ai/text-to-speech-api
   baseURL: https://bff.listnr.tech/api/tts/v1
   tags:
-  - Text-to-Speech
+  - Billing
   properties:
   - type: OpenAPI
-    url: openapi/listnr-text-to-speech-api-openapi.yml
+    url: openapi/listnr-billing-api-openapi.yml
   - type: Documentation
     url: https://listnr.ai/text-to-speech-api
   - type: APIReference
@@ -94,18 +92,16 @@ apis:
     url: collections/listnr.postman_collection.json
   - type: OpenCollection
     url: collections/listnr.opencollection.json
-- aid: listnr:listnr-voices-api
-  name: Listnr Voices API
-  description: List the AI voices available on Listnr.
+- aid: listnr:listnr-catalog-api
+  name: Listnr Catalog API
+  description: Tools and marketing pages
   humanURL: https://listnr.ai/text-to-speech-api
   baseURL: https://bff.listnr.tech/api/tts/v1
   tags:
-  - Voice
-  tags_raw:
-  - Voices
+  - Catalog
   properties:
   - type: OpenAPI
-    url: openapi/listnr-voices-api-openapi.yml
+    url: openapi/listnr-catalog-api-openapi.yml
   - type: Documentation
     url: https://listnr.ai/text-to-speech-api
   - type: APIReference

@@ -1,0 +1,12 @@
+{
+ "url": "https://studio.listnr.ai/openapi.json",
+ "final": "https://studio.listnr.ai/openapi.json",
+ "status": 200,
+ "content_type": "application/vnd.oai.openapi+json;version=3.1",
+ "bytes": 26076,
+ "sha256": "c8a4932d4c64e3f6e13171f2712cedc33df620e16aaea2997a2dd26c1a7c7a8b",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}
