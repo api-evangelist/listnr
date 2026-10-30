@@ -1,4 +1,4 @@
-# Listnr (listnr)
+# Listnr
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,110 +64,124 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Listnr AI is a text-to-speech and AI voice platform offering 1,000+ ultra-realistic voices across 142+ languages and accents, used for voiceovers, podcasts, and text-to-video. Listnr is primarily a web application, but it also exposes a **documented public Text-to-Speech API** at base `https://bff.listnr.tech/api/tts/v1`. The API converts SSML text or an article URL into MP3/WAV audio synchronously or asynchronously, lists available voices, and reports async job status. API keys are self-service: generate a personal key in the Listnr dashboard at `voices.listnr.tech` and pass it in an `x-listnr-token` header. Keep the key server-side — never expose it in the browser or front-end code.
+Listnr AI is a text-to-speech and AI voice platform offering 1,000+ ultra-realistic voices across 142+ languages and accents, used for voiceovers, podcasts, and text-to-video. Beyond the web app, Listnr exposes a documented public Text-to-Speech API (base https://bff.listnr.tech/api/tts/v1) that converts SSML text or article URLs into MP3/WAV audio synchronously or asynchronously, lists available voices, and reports async job status. API keys are generated from the Listnr dashboard at voices.listnr.tech and passed via an x-listnr-token header.
 
-The endpoints, parameters, headers, and job-status values below are confirmed from Listnr's public API documentation at [github.com/team-listnr/text-to-speech-api](https://github.com/team-listnr/text-to-speech-api). The OpenAPI and collections in this repository model request/response schemas from those documented fields and should be verified against the live API.
+**Areas:** Artificial Intelligence · Text-to-Speech · TTS · Voice · Speech Synthesis · Audio · Voiceover
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/listnr/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/listnr/refs/heads/main/apis.yml)
+## Listnr on APIs.io
 
-## Tags
+Everything profiled for Listnr is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/listnr/](https://apis.io/providers/listnr/)** — or go straight to one of the APIs or properties below.
 
-- AI
-- Text to Speech
-- TTS
-- Voice
-- Speech Synthesis
-- Audio
-- Voiceover
+### APIs (3)
 
-## Timestamps
+- [Listnr Jobs API](https://apis.io/apis/listnr/listnr-jobs-api/) — Poll the status of asynchronous conversion jobs.
+- [Listnr Text-to-Speech API](https://apis.io/apis/listnr/listnr-text-to-speech-api/) — Convert SSML text or an article URL into audio.
+- [Listnr Voices API](https://apis.io/apis/listnr/listnr-voices-api/) — List the AI voices available on Listnr.
 
-- **Created:** 2026-07-11
-- **Modified:** 2026-07-11
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Listnr Text-to-Speech API
+#### Agentic access (1)
 
-Convert SSML text or an article URL into MP3/WAV speech using a chosen voice, voice style, speed, and sample rate. Synchronous endpoints (`/convert-text`, `/convert-url`) return an audio URL directly; asynchronous endpoints (`/convert-text-async`, `/convert-url-async`) return a `jobId` to poll.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://listnr.ai/text-to-speech-api](https://listnr.ai/text-to-speech-api)
-- **Base URL:** `https://bff.listnr.tech/api/tts/v1`
+- [Listnr Agentic Access](https://apis.io/agentic-access/listnr/listnr-agentic-access/)
 
-#### Tags
+#### Collections (4)
 
-- Text to Speech
-- Speech Synthesis
-- Audio
+Postman and Open Collection request collections.
 
-#### Properties
+- [Listnr Text-to-Speech API](https://apis.io/collections/listnr/open-listnr/)
+- [Listnr Text-to-Speech Jobs API](https://apis.io/collections/listnr/open-listnr-jobs-api/)
+- [Listnr Jobs Text-to-Speech API](https://apis.io/collections/listnr/open-listnr-text-to-speech-api/)
+- [Listnr Text-to-Speech Jobs Voices API](https://apis.io/collections/listnr/open-listnr-voices-api/)
 
-- [Documentation](https://listnr.ai/text-to-speech-api)
-- [API Reference](https://github.com/team-listnr/text-to-speech-api)
-- [OpenAPI](openapi/listnr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/listnr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/listnr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (2)
 
-### Listnr Voices API
+Authentication, trust centre, and vulnerability disclosure.
 
-List the voices available on Listnr, optionally filtered by language, gender, and style. Each voice returns its identifier, language, gender, and supported voice styles for use with the Text-to-Speech API.
+- [Listnr Authentication](https://apis.io/security/listnr/listnr-authentication/)
+- [Listnr Domain Security](https://apis.io/security/listnr/listnr-domain-security/)
 
-- **Human URL:** [https://github.com/team-listnr/text-to-speech-api](https://github.com/team-listnr/text-to-speech-api)
-- **Base URL:** `https://bff.listnr.tech/api/tts/v1`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Voices
-- Languages
-- Catalog
+- [Listnr Plans Pricing](https://apis.io/plans/listnr/listnr-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [API Reference](https://github.com/team-listnr/text-to-speech-api)
-- [OpenAPI](openapi/listnr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/listnr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/listnr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### Listnr Audio Jobs API
+- [Listnr Rate Limits](https://apis.io/rate-limits/listnr/listnr-rate-limits/)
 
-Poll the status of an asynchronous text-to-speech or URL-to-speech job by `jobId`. Returns a status of `PENDING`, `IN_PROGRESS`, `COMPLETED`, or `FAILED`, plus the resulting audio URL and audio key when the job finishes.
+#### FinOps (1)
 
-- **Human URL:** [https://github.com/team-listnr/text-to-speech-api](https://github.com/team-listnr/text-to-speech-api)
-- **Base URL:** `https://bff.listnr.tech/api/tts/v1`
+What the API costs to run, by operation.
 
-#### Tags
+- [Listnr Finops](https://apis.io/finops/listnr/listnr-finops/)
 
-- Jobs
-- Async
-- Status
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [API Reference](https://github.com/team-listnr/text-to-speech-api)
-- [OpenAPI](openapi/listnr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/listnr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/listnr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/listnr)
-- [GitHub Organization](https://github.com/team-listnr)
 - [Website](https://listnr.ai)
 - [Documentation](https://github.com/team-listnr/text-to-speech-api)
-- [Sign Up](https://voices.listnr.tech)
-- [Plans](plans/listnr-plans-pricing.yml)
-- [Rate Limits](rate-limits/listnr-rate-limits.yml)
-- [Fin Ops](finops/listnr-finops.yml)
+- [Pricing](https://listnr.ai/pricing)
+- [Sign up](https://voices.listnr.tech)
+- [Blog](https://listnr.ai/blog)
+- [GitHub](https://github.com/team-listnr)
 
-## Authentication
+## API Evangelist rating
 
-All requests require a personal API key generated in the Listnr dashboard at [voices.listnr.tech](https://voices.listnr.tech), passed in an `x-listnr-token` request header. Do not use the API key in front-end code or the browser.
+**Kin Score 35.1** — thin · rubric 0.24.0 · scored 2026-10-17
 
-## Access Model
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 48.7 |
 
-Listnr is primarily a web application (podcast, voiceover, and text-to-video studio). On top of that, it offers a documented, self-service public Text-to-Speech API whose reference lives in a public GitHub repository. The endpoints in this catalog are confirmed from that documentation; request/response schemas in the OpenAPI and collections are modeled from the documented fields and should be verified against the live API. No public WebSocket API is documented — see `review.yml`.
+**Agent readiness 17.9** — agent-aware
 
-## Maintainers
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Regulatory alignment 10.9** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/listnr/](https://apis.io/providers/listnr/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Listnr: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/listnr/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
